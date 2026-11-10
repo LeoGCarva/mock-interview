@@ -1,124 +1,124 @@
 # Mock Interview
 
-Treine entrevistas de emprego **falando em voz alta** com um entrevistador de IA (Google Gemini).
+Practice job interviews **speaking out loud** with an AI interviewer (Google Gemini).
 
-Você cola a descrição de uma vaga e o entrevistador faz perguntas sob medida para ela. Você responde pelo microfone e ele reage ao que você disse, com um aprofundamento ou um novo tema. No fim, você recebe um relatório com nota e dicas de melhoria.
+You paste a job description and the interviewer asks questions tailored to it. You answer through the microphone and it reacts to what you said, with a follow-up or a new topic. At the end, you get a report with a score and tips for improvement.
 
-Cada rodada tem três passos:
+Each round has three steps:
 
-1. **Você fala:** sua resposta é transcrita ao vivo. Como numa entrevista real, a transcrição não pode ser editada nem regravada.
-2. **O entrevistador pensa:** o Gemini lê sua resposta e decide a próxima pergunta.
-3. **O entrevistador fala:** a resposta dele é lida em voz alta enquanto ainda está sendo gerada.
+1. **You speak:** your answer is transcribed live. As in a real interview, the transcript can't be edited or re-recorded.
+2. **The interviewer thinks:** Gemini reads your answer and decides the next question.
+3. **The interviewer speaks:** its reply is read aloud while it's still being generated.
 
-Nada fica salvo: não há banco de dados nem login. A entrevista existe só na aba do navegador.
+Nothing is saved: there's no database and no login. The interview exists only in the browser tab.
 
-## Requisitos
+## Requirements
 
-- **Node.js** 20 ou mais recente
-- Uma **chave da API do Google Gemini**, gratuita em https://aistudio.google.com/apikey
-- **Google Chrome ou Microsoft Edge** no computador. O Firefox não tem reconhecimento de fala.
-- Microfone e conexão com a internet. O Chrome e o Edge transcrevem a fala na nuvem.
+- **Node.js** 20 or later
+- A **Google Gemini API key**, free at https://aistudio.google.com/apikey
+- **Google Chrome or Microsoft Edge** on a computer. Firefox doesn't have speech recognition.
+- A microphone and an internet connection. Chrome and Edge transcribe speech in the cloud.
 
-## Instalação
+## Installation
 
 ```bash
 npm install
 cp .env.example .env.local
 ```
 
-Abra o `.env.local` e cole sua chave:
+Open `.env.local` and paste your key:
 
 ```env
-GEMINI_API_KEY=sua-chave-aqui
+GEMINI_API_KEY=your-key-here
 
-# Opcional: outro modelo Gemini 3 ou mais recente (padrão: gemini-3.8-flash)
+# Optional: another Gemini 3 or later model (default: gemini-3.8-flash)
 # GEMINI_MODEL=gemini-3.8-flash
 ```
 
-A chave fica só no servidor e nunca é enviada ao navegador. O `.env.local` já está no `.gitignore`.
+The key stays on the server only and is never sent to the browser. `.env.local` is already in `.gitignore`.
 
-## Como rodar
+## How to run
 
 ```bash
 npm run dev
 ```
 
-Abra http://localhost:3000 no Chrome ou no Edge. O microfone só funciona em `localhost` ou em HTTPS.
+Open http://localhost:3000 in Chrome or Edge. The microphone only works on `localhost` or over HTTPS.
 
-## Como usar
+## How to use
 
-### 1. Configure a entrevista
+### 1. Set up the interview
 
-| Campo | O que fazer |
+| Field | What to do |
 |---|---|
-| **Descrição da vaga** | Cole o anúncio da vaga: cargo, empresa, responsabilidades e requisitos (de 50 a 20.000 caracteres). Quanto mais detalhes, mais específicas ficam as perguntas. |
-| **Idioma da entrevista** | Português (Brasil) ou English (US). O idioma vale para a tela, a transcrição, a voz, as perguntas e o feedback. |
-| **Número de perguntas** | 3, 5, 8 ou 10. As perguntas de aprofundamento também contam. |
-| **Voz do entrevistador** | Deixe em "Automática" ou escolha uma voz instalada. Use **Testar voz** para ouvir como ela soa. |
+| **Job description** | Paste the job posting: role, company, responsibilities, and requirements (50 to 20,000 characters). The more detail, the more specific the questions. |
+| **Interview language** | Português (Brasil) or English (US). The language applies to the screen, the transcript, the voice, the questions, and the feedback. |
+| **Number of questions** | 3, 5, 8, or 10. Follow-up questions also count. |
+| **Interviewer voice** | Leave it on "Automatic" or choose an installed voice. Use **Test voice** to hear how it sounds. |
 
-Clique em **Começar entrevista**. Na primeira vez, o navegador pede permissão para usar o microfone.
+Click **Start interview**. The first time, the browser asks for permission to use the microphone.
 
-### 2. Responda às perguntas
+### 2. Answer the questions
 
-1. O entrevistador se apresenta e faz a primeira pergunta em voz alta.
-2. Quando ele terminar de falar, clique em **Começar a responder** e fale normalmente.
-3. Clique em **Finalizar resposta** quando terminar. O entrevistador então faz a próxima pergunta.
+1. The interviewer introduces itself and asks the first question out loud.
+2. When it finishes speaking, click **Start answering** and speak normally.
+3. Click **Finish answer** when you're done. The interviewer then asks the next question.
 
-O microfone nunca fica aberto enquanto o entrevistador fala. Durante a entrevista você pode usar estes botões:
+The microphone is never open while the interviewer is speaking. During the interview you can use these buttons:
 
-| Botão | O que faz |
+| Button | What it does |
 |---|---|
-| **Repetir** | Ouve de novo a última fala do entrevistador |
-| **Pular voz** | Interrompe a fala atual. O texto continua na tela. |
-| **Silenciar / Ativar som** | Liga ou desliga a voz do entrevistador |
-| **Encerrar entrevista** | Termina antes do fim e gera feedback só sobre as perguntas já respondidas |
+| **Replay** | Hear the interviewer's last line again |
+| **Skip voice** | Stops the current speech. The text stays on screen. |
+| **Mute / Unmute** | Turns the interviewer's voice off or on |
+| **End interview** | Ends before the finish and generates feedback only on the questions already answered |
 
-Se a gravação parar sozinha no meio da resposta, você pode clicar em **Continuar respondendo** ou em **Enviar resposta** para mandar o que já foi captado. Se der erro na IA, **Tentar novamente** reenvia a mesma rodada.
+If the recording stops on its own in the middle of your answer, you can click **Continue answering** or **Submit answer** to send what was already captured. If the AI returns an error, **Try again** resends the same round.
 
-### 3. Leia o feedback
+### 3. Read the feedback
 
-Depois da última resposta, o entrevistador se despede e o relatório aparece com:
+After the last answer, the interviewer says goodbye and the report appears with:
 
-- **nota geral** de 1 a 10 (5 é a média), resumo, pontos fortes e o que melhorar;
-- **pergunta por pergunta**: nota, o que foi bem, o que melhorar e como deixar a resposta mais forte;
-- **próximos passos** e a **transcrição** completa.
+- **overall score** from 1 to 10 (5 is average), summary, strengths, and what to improve;
+- **question by question**: score, what went well, what to improve, and how to make the answer stronger;
+- **next steps** and the full **transcript**.
 
-Opções do relatório:
+Report options:
 
-- **Ler resumo em voz alta**
-- **Baixar relatório (.md)**: arquivo Markdown com feedback, transcrição e descrição da vaga
-- **Praticar de novo (mesma vaga)**
-- **Nova descrição de vaga**
+- **Read summary aloud**
+- **Download report (.md)**: Markdown file with the feedback, transcript, and job description
+- **Practice again (same job)**
+- **New job description**
 
-## Dicas e problemas comuns
+## Tips and common problems
 
-| Problema | Solução |
+| Problem | Solution |
 |---|---|
-| "O servidor não tem uma chave da API" | Preencha `GEMINI_API_KEY` no `.env.local` e reinicie o `npm run dev`. |
-| "A chave da API do Gemini foi recusada" | Confira se a chave foi copiada inteira, sem espaços. |
-| Microfone bloqueado | Clique no ícone de cadeado na barra de endereço, libere o microfone e recarregue a página. |
-| "Não captamos nada" | Verifique se o microfone certo está selecionado no sistema e no navegador. |
-| Você ouve a própria voz enquanto fala | Isso não vem do app. No Windows, desative "Escutar este dispositivo" (Configurações de som → Gravação → seu microfone → Propriedades → Escutar) ou o retorno de microfone do headset. |
-| A voz soa robótica | A qualidade depende das vozes instaladas. No Edge, as vozes "Natural/Online" costumam soar melhor. |
-| Recarreguei a página e perdi tudo | É o comportamento esperado, porque nada é salvo. Baixe o relatório antes de sair. |
+| "The server has no Google Gemini API key" | Fill in `GEMINI_API_KEY` in `.env.local` and restart `npm run dev`. |
+| "The Gemini API key was rejected" | Check that the key was copied in full, with no spaces. |
+| Microphone blocked | Click the lock icon in the address bar, allow the microphone, and reload the page. |
+| "We didn't catch anything" | Check that the right microphone is selected in the system and in the browser. |
+| You hear your own voice while speaking | This doesn't come from the app. On Windows, turn off "Listen to this device" (Sound settings → Recording → your microphone → Properties → Listen) or your headset's microphone monitoring. |
+| The voice sounds robotic | The quality depends on the installed voices. In Edge, the "Natural/Online" voices usually sound better. |
+| I reloaded the page and lost everything | This is the expected behavior, because nothing is saved. Download the report before leaving. |
 
 ## Scripts
 
-| Comando | O que faz |
+| Command | What it does |
 |---|---|
-| `npm run dev` | Servidor de desenvolvimento em http://localhost:3000 |
-| `npm run build` | Build de produção |
-| `npm start` | Roda o build de produção |
-| `npm test` | Testes unitários (vitest) |
+| `npm run dev` | Development server at http://localhost:3000 |
+| `npm run build` | Production build |
+| `npm start` | Runs the production build |
+| `npm test` | Unit tests (vitest) |
 | `npm run lint` | ESLint |
-| `npx tsc --noEmit` | Checagem de tipos |
+| `npx tsc --noEmit` | Type checking |
 
-## Tecnologias
+## Technologies
 
-Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Google Gemini (`@google/genai`), zod e a Web Speech API do navegador para transcrição e voz.
+Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Google Gemini (`@google/genai`), zod, and the browser's Web Speech API for transcription and voice.
 
-## Aviso antes de publicar
+## Warning before publishing
 
-As rotas da API não têm autenticação nem limite de requisições. O projeto foi feito para uso local ou pessoal: se for publicado como está, qualquer pessoa pode gastar seus créditos do Gemini.
+The API routes have no authentication or request limits. The project was made for local or personal use: if it's published as is, anyone can spend your Gemini credits.
 
-Arquitetura, contratos da API, detalhes dos prompts e a lista completa de funcionalidades estão em [CONTEXT.md](./CONTEXT.md).
+Architecture, API contracts, prompt details, and the full feature list are in [CONTEXT.md](./CONTEXT.md).
